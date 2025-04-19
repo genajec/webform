@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Руководство по настройке вебхуков Stripe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .step {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: #28a745;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Руководство по настройке вебхуков Stripe</h1>
+        
+        <div class="card">
+            <div class="card-header">
+                Информация о настройке
+            </div>
+            <div class="card-body">
+                <p>Для корректной работы платежной системы Stripe с FaceForm Bot необходимо настроить вебхуки, которые позволят Stripe автоматически уведомлять ваше приложение об изменении статуса платежей.</p>
+                
+                <div class="alert alert-info">
+                    <strong>Важно!</strong> Вебхуки особенно важны для обработки асинхронных платежей и автоматического начисления кредитов после успешной оплаты.
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="mt-4 mb-3">Шаги по настройке вебхуков Stripe</h2>
+        
+        <div class="step">
+            <div class="step-number">1</div>
+            <strong>Войдите в панель управления Stripe</strong>
+            <p>Перейдите на сайт <a href="https://dashboard.stripe.com/" target="_blank">dashboard.stripe.com</a> и войдите в свой аккаунт.</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">2</div>
+            <strong>Перейдите в раздел вебхуков</strong>
+            <p>В левом меню выберите "Developers" → "Webhooks" (или перейдите по прямой ссылке <a href="https://dashboard.stripe.com/webhooks" target="_blank">dashboard.stripe.com/webhooks</a>).</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">3</div>
+            <strong>Добавьте новый эндпоинт</strong>
+            <p>Нажмите кнопку "+ Add endpoint" для добавления нового эндпоинта вебхука.</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">4</div>
+            <strong>Укажите URL вашего эндпоинта</strong>
+            <p>В поле "Endpoint URL" введите URL вашего приложения, добавив в конце <code>/stripe-webhook</code>.</p>
+            <p>Например, если ваше приложение размещено по адресу <code>https://example.com</code>, то URL эндпоинта будет <code>https://example.com/stripe-webhook</code>.</p>
+            <p>Для Replit URL будет иметь формат <code>https://your-repl-name.replit.app/stripe-webhook</code>.</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">5</div>
+            <strong>Выберите события для прослушивания</strong>
+            <p>В разделе "Events to listen to" выберите следующие события:</p>
+            <ul>
+                <li><code>checkout.session.completed</code> - завершение оплаты</li>
+                <li><code>checkout.session.async_payment_succeeded</code> - успешная асинхронная оплата</li>
+                <li><code>checkout.session.async_payment_failed</code> - неудачная асинхронная оплата</li>
+                <li><code>checkout.session.expired</code> - истек срок действия сессии</li>
+            </ul>
+            <p>Можно также выбрать "Receive all events" для получения всех событий (не рекомендуется для высоконагруженных систем).</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">6</div>
+            <strong>Добавьте описание (опционально)</strong>
+            <p>В поле "Description" можно добавить описание вебхука, например, "FaceForm Bot payment webhook".</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">7</div>
+            <strong>Создайте эндпоинт</strong>
+            <p>Нажмите кнопку "Add endpoint" для создания эндпоинта.</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">8</div>
+            <strong>Получите секретный ключ вебхука</strong>
+            <p>После создания эндпоинта Stripe предоставит вам секретный ключ вебхука (Signing Secret). Скопируйте этот ключ, он понадобится для проверки подлинности вебхуков.</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">9</div>
+            <strong>Добавьте секретный ключ в переменные окружения</strong>
+            <p>Добавьте скопированный секретный ключ в файл <code>.env</code> вашего приложения:</p>
+            <pre>STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret_key</pre>
+            <p>Замените <code>whsec_your_webhook_secret_key</code> на полученный секретный ключ.</p>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header">
+                Проверка работоспособности
+            </div>
+            <div class="card-body">
+                <p>После настройки вебхука можно проверить его работоспособность несколькими способами:</p>
+                <ol>
+                    <li>В интерфейсе Stripe в разделе вебхуков нажмите на созданный эндпоинт, затем выберите "Send test webhook" для отправки тестового события.</li>
+                    <li>Выполните тестовый платеж через созданную вами систему и проверьте логи на наличие события вебхука.</li>
+                </ol>
+                <p>При корректной настройке вебхука после успешной оплаты пользователям будут автоматически начисляться кредиты.</p>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header">
+                Отладка вебхуков
+            </div>
+            <div class="card-body">
+                <p>Для отладки вебхуков Stripe предоставляет несколько инструментов:</p>
+                <ol>
+                    <li><strong>Логи вебхуков</strong> - доступны в панели управления Stripe в разделе вебхуков.</li>
+                    <li><strong>Локальная отладка</strong> - с помощью Stripe CLI можно перенаправлять вебхуки на локальное окружение.</li>
+                </ol>
+                <p>Если вебхуки не работают, проверьте:</p>
+                <ul>
+                    <li>Правильность URL эндпоинта</li>
+                    <li>Правильность секретного ключа в переменных окружения</li>
+                    <li>Доступность вашего приложения из интернета</li>
+                    <li>Логи вашего приложения на наличие ошибок при обработке вебхуков</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="/stripe_test" class="btn btn-primary">Вернуться к тесту Stripe</a>
+        </div>
+    </div>
+</body>
+</html>

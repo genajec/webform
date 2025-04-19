@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ошибка при обработке платежа</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 500px;
+        }
+        h1 {
+            color: #e53935;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #5181b8;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #4273a0;
+        }
+        .error-icon {
+            color: #e53935;
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        .test-mode {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 4px;
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #856404;
+        }
+        .tips {
+            background-color: #e9f5ff;
+            border: 1px solid #b8daff;
+            border-radius: 4px;
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #004085;
+            text-align: left;
+        }
+        .tips ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .tips li {
+            margin-bottom: 5px;
+        }
+        .session-id {
+            font-size: 12px;
+            color: #777;
+            margin-top: 20px;
+        }
+    </style>
+    <script type="text/javascript">
+        // Автоматически перенаправляем в Telegram после небольшой задержки (10 секунд)
+        window.onload = function() {
+            setTimeout(function() {
+                var botUrl = "{{ bot_url|default('https://t.me/Faceform_bot') }}";
+                window.location.href = botUrl;
+            }, 10000); // Перенаправление через 10 секунд
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="error-icon">✗</div>
+        <h1>Ошибка при обработке платежа</h1>
+        
+        {% if is_test_mode %}
+        <div class="test-mode">
+            <strong>Внимание!</strong> Вы используете тестовый режим оплаты. 
+            Убедитесь, что вы используете тестовую карту.
+        </div>
+        {% endif %}
+        
+        <p>{{ message|default('Произошла ошибка при обработке вашего платежа.') }}</p>
+        
+        <div class="tips">
+            <strong>Советы для решения проблемы:</strong>
+            <ul>
+                <li>Убедитесь, что на карте достаточно средств</li>
+                <li>Проверьте, не истек ли срок действия карты</li>
+                <li>Возможно, банк отклонил платеж по соображениям безопасности</li>
+                <li>Попробуйте использовать другую карту или способ оплаты</li>
+            </ul>
+        </div>
+        
+        <p>Перенаправление в Telegram через 10 секунд...</p>
+        <a href="{{ bot_url|default('https://t.me/Faceform_bot') }}" class="btn">Вернуться в бот сейчас</a>
+        
+        {% if session_id %}
+        <div class="session-id">ID транзакции: {{ session_id }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>

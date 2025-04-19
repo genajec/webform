@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата успешно завершена</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 500px;
+        }
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #5181b8;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #4273a0;
+        }
+        .credits {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin: 20px 0;
+        }
+        .success-icon {
+            color: #4CAF50;
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        .test-mode {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 4px;
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-size: 14px;
+            color: #856404;
+        }
+        .session-id {
+            font-size: 12px;
+            color: #777;
+            margin-top: 20px;
+        }
+    </style>
+    <script type="text/javascript">
+        // Автоматически перенаправляем в Telegram после небольшой задержки
+        window.onload = function() {
+            setTimeout(function() {
+                var botUrl = "{{ bot_url|default('https://t.me/Faceform_bot') }}";
+                window.location.href = botUrl;
+            }, 3000); // Перенаправление через 3 секунды
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">✓</div>
+        <h1>Оплата успешно завершена!</h1>
+        
+        {% if is_test_mode %}
+        <div class="test-mode">
+            <strong>Внимание!</strong> Вы используете тестовый режим оплаты. 
+            Реальные деньги не были списаны с вашей карты.
+        </div>
+        {% endif %}
+        
+        <p>Ваш платеж был успешно обработан. Кредиты были зачислены на ваш аккаунт.</p>
+        <div class="credits">+ {{ credits }} кредитов</div>
+        <p>Перенаправление в Telegram через 3 секунды...</p>
+        <a href="{{ bot_url|default('https://t.me/Faceform_bot') }}" class="btn">Вернуться в бот сейчас</a>
+        
+        {% if session_id %}
+        <div class="session-id">ID транзакции: {{ session_id }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>

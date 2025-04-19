@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceForm AI - Интеллектуальный бот для анализа лица и подбора причесок</title>
+    <link rel="icon" href="/static/img/favicon.svg" type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e8b57;
+            --secondary-color: #4682b4;
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+        .navbar {
+            background-color: var(--primary-color);
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4rem 0;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .feature-item {
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .feature-item:hover {
+            transform: translateY(-10px);
+        }
+        .feature-title {
+            font-weight: 600;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        .btn-primary:hover {
+            background-color: #236d44;
+            border-color: #236d44;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .package-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        .demo-image {
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem 0;
+        }
+        .testimonial {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .testimonial-text {
+            font-style: italic;
+        }
+        .testimonial-author {
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">FaceForm AI</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Функции</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Цены</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#demo">Демо</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Контакты</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Главный баннер -->
+    <section class="hero">
+        <div class="container text-center">
+            <h1>Интеллектуальный бот для анализа лица и подбора причесок</h1>
+            <p class="lead mt-3">FaceForm AI использует передовые технологии компьютерного зрения и искусственного интеллекта для профессионального анализа вашего лица и подбора идеальной прически</p>
+            <div class="mt-4">
+                <a href="https://t.me/faceform_bot" class="btn btn-light btn-lg me-2">
+                    <i class="fab fa-telegram"></i> Открыть бота
+                </a>
+                <a href="#pricing" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-tags"></i> Тарифы
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Функции -->
+    <section class="py-5" id="features">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Что умеет FaceForm AI?</h2>
+                <p class="lead">Наш бот предлагает широкий спектр возможностей для анализа и преображения внешности</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <h3 class="feature-title">Анализ формы лица</h3>
+                        <p>Точное определение формы вашего лица на основе биометрических пропорций с использованием компьютерного зрения</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-cut"></i>
+                        </div>
+                        <h3 class="feature-title">Подбор причесок</h3>
+                        <p>Персонализированные рекомендации по прическам, идеально подходящим для формы вашего лица</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <h3 class="feature-title">Виртуальная примерка</h3>
+                        <p>Возможность виртуально примерить различные прически с использованием ИИ</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <h3 class="feature-title">Замена фона</h3>
+                        <p>Автоматическое удаление и замена фона на фотографиях на более профессиональный</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Генерация изображений</h3>
+                        <p>Создание персонализированных изображений с использованием передового ИИ на основе ваших описаний</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <h3 class="feature-title">Анализ привлекательности</h3>
+                        <p>Оценка симметрии и гармонии лица по классическим канонам красоты</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Тарифы -->
+    <section class="py-5 bg-light" id="pricing">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Тарифы и цены</h2>
+                <p class="lead">Выберите подходящий пакет кредитов, чтобы разблокировать все возможности бота</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center p-4">
+                            <h3>Базовый пакет</h3>
+                            <div class="package-price my-4">$0.40</div>
+                            <p class="mb-4">5 кредитов</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Анализ формы лица</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Подбор причесок</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Виртуальная примерка</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Замена фона</li>
+                            </ul>
+                            <a href="/stripe_test_payment?package_id=basic" class="btn btn-primary btn-lg w-100">Купить</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-primary">
+                        <div class="card-header bg-primary text-white text-center py-3">
+                            <h5 class="mb-0">Рекомендуемый</h5>
+                        </div>
+                        <div class="card-body text-center p-4">
+                            <h3>Стандартный пакет</h3>
+                            <div class="package-price my-4">$0.90</div>
+                            <p class="mb-4">10 кредитов</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Все функции базового пакета</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Генерация изображений по описанию</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Дополнительные стили причесок</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Анализ привлекательности лица</li>
+                            </ul>
+                            <a href="/stripe_test_payment?package_id=standard" class="btn btn-primary btn-lg w-100">Купить</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center p-4">
+                            <h3>Премиум пакет</h3>
+                            <div class="package-price my-4">$1.70</div>
+                            <p class="mb-4">20 кредитов</p>
+                            <ul class="list-unstyled mb-4">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Все функции стандартного пакета</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Расширенная генерация изображений</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Детальный анализ лица</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Приоритетная обработка</li>
+                            </ul>
+                            <a href="/stripe_test_payment?package_id=premium" class="btn btn-primary btn-lg w-100">Купить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Демо -->
+    <section class="py-5" id="demo">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Примеры работы</h2>
+                <p class="lead">Посмотрите, как работает FaceForm AI на реальных примерах</p>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Анализ формы лица</h4>
+                            <p>Наш алгоритм определяет форму лица и дает персонализированные рекомендации.</p>
+                            <img src="/static/img/face_analysis.jpeg" alt="Пример анализа лица" class="img-fluid demo-image">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Виртуальная примерка причесок</h4>
+                            <p>Примерьте различные стили причесок прямо в Telegram.</p>
+                            <img src="/static/img/hairstyle_try.png" alt="Примерка причесок" class="img-fluid demo-image">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Генерация изображений с помощью ИИ</h4>
+                            <p>Создавайте уникальные изображения по вашему текстовому описанию.</p>
+                            <img src="/static/img/ai_generation.png" alt="ИИ генерация" class="img-fluid demo-image">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Замена и улучшение фона</h4>
+                            <p>Автоматическое удаление фона и замена его на профессиональный.</p>
+                            <img src="/static/img/background_change.png" alt="Замена фона" class="img-fluid demo-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Отзывы пользователей</h2>
+                <p class="lead">Что говорят наши клиенты о FaceForm AI</p>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="testimonial">
+                        <p class="testimonial-text">"Потрясающий бот! Анализ формы лица и рекомендации по прическам оказались очень точными. Я впервые нашла прическу, которая действительно мне подходит."</p>
+                        <p class="testimonial-author">- Мария К.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="testimonial">
+                        <p class="testimonial-text">"Функция виртуальной примерки причесок просто фантастическая! Я смог увидеть, как буду выглядеть с разными стрижками, прежде чем идти в салон."</p>
+                        <p class="testimonial-author">- Алексей П.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="testimonial">
+                        <p class="testimonial-text">"Генерация изображений на основе моих описаний работает просто магически. Я создала несколько потрясающих портретов для своего профиля."</p>
+                        <p class="testimonial-author">- Ирина С.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="testimonial">
+                        <p class="testimonial-text">"Замена фона на моих фотографиях теперь занимает секунды вместо часов в фоторедакторе. Очень удобный инструмент!"</p>
+                        <p class="testimonial-author">- Дмитрий В.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="py-5" id="contact">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Свяжитесь с нами</h2>
+                <p class="lead">Есть вопросы или предложения? Мы всегда на связи!</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <div class="row mb-4">
+                                <div class="col-md-4 text-center mb-3 mb-md-0">
+                                    <div class="feature-icon">
+                                        <i class="fab fa-telegram"></i>
+                                    </div>
+                                    <h5>Telegram</h5>
+                                    <p><a href="https://t.me/faceform_bot" class="text-decoration-none">@faceform_bot</a></p>
+                                </div>
+                                <div class="col-md-4 text-center mb-3 mb-md-0">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <h5>Email</h5>
+                                    <p><a href="mailto:support@faceformai.com" class="text-decoration-none">support@faceformai.com</a></p>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-headset"></i>
+                                    </div>
+                                    <h5>Поддержка</h5>
+                                    <p>Круглосуточно 24/7</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>FaceForm AI</h4>
+                    <p>Интеллектуальный бот для анализа лица и подбора причесок с использованием передовых технологий искусственного интеллекта.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Ссылки</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#features" class="text-white text-decoration-none">Функции</a></li>
+                        <li><a href="#pricing" class="text-white text-decoration-none">Цены</a></li>
+                        <li><a href="#demo" class="text-white text-decoration-none">Демо</a></li>
+                        <li><a href="#contact" class="text-white text-decoration-none">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Юридическая информация</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/terms" class="text-white text-decoration-none">Условия использования</a></li>
+                        <li><a href="/privacy" class="text-white text-decoration-none">Политика конфиденциальности</a></li>
+                        <li><a href="/refund" class="text-white text-decoration-none">Правила возврата</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-4 mb-3" style="border-color: rgba(255,255,255,0.2);">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 FaceForm AI. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
